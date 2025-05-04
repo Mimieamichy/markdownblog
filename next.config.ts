@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // No specific changes needed for markdown processing or App Router here.
+  // Default settings work fine.
 };
 
 export default nextConfig;

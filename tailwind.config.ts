@@ -3,12 +3,16 @@ import type { Config } from "tailwindcss";
 export default {
     darkMode: ["class"],
     content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    // Adjusted for App Router structure
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    // Include markdown files if styling directly within them (less common)
+    // "./posts/**/*.md",
   ],
   theme: {
   	extend: {
+  		// Add typography plugin styles if using @tailwindcss/typography
+      // typography: (theme) => ({ ... }),
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -90,5 +94,8 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // require('@tailwindcss/typography'), // Uncomment if using the official typography plugin
+  ],
 } satisfies Config;

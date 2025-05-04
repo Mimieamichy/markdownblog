@@ -2,6 +2,9 @@ import { getAllPostIds, getPostData, type PostDataWithContent } from '@/lib/post
 import { format } from 'date-fns';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 type Props = {
   params: { id: string };
@@ -63,17 +66,25 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <article className="max-w-3xl mx-auto">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">{postData.title}</h1>
-        <div className="text-sm text-muted-foreground">
-          Published on {format(new Date(postData.date), 'MMMM d, yyyy')}
-        </div>
-      </header>
-      <div
-        className="prose prose-lg dark:prose-invert max-w-none markdown" // Add .markdown class
-        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-      />
-    </article>
+    <div className="max-w-3xl mx-auto">
+       <Button variant="ghost" asChild className="mb-6 pl-0">
+        <Link href="/">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to posts
+        </Link>
+      </Button>
+      <article>
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold mb-2">{postData.title}</h1>
+          <div className="text-sm text-muted-foreground">
+            Published on {format(new Date(postData.date), 'MMMM d, yyyy')}
+          </div>
+        </header>
+        <div
+          className="prose prose-lg dark:prose-invert max-w-none markdown" // Add .markdown class
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
+      </article>
+    </div>
   );
 }

@@ -49,12 +49,18 @@ export function getSortedPostsData(): PostData[] {
     };
   });
 
-  // Sort posts by date
+  // Sort posts by date (newest first)
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+    // Ensure dates are valid before comparing
+    const dateA = a.date ? new Date(a.date).getTime() : 0;
+    const dateB = b.date ? new Date(b.date).getTime() : 0;
+
+    if (dateA < dateB) {
       return 1;
-    } else {
+    } else if (dateA > dateB) {
       return -1;
+    } else {
+      return 0;
     }
   });
 }

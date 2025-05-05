@@ -12,16 +12,17 @@ type Props = {
 
 // Generate Metadata for SEO
 export async function generateMetadata(
-  { params }: Props,
+  props: Promise<Props>,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { params } = await props;
   const id = params.id;
   let postData: PostDataWithContent | null = null;
 
   try {
     postData = await getPostData(id);
   } catch (error) {
-     // If post not found, let it fall through to the page component to handle 404
+    // If post not found
   }
 
   if (!postData) {
@@ -31,17 +32,12 @@ export async function generateMetadata(
     };
   }
 
-  // Optionally resolve parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
-
   return {
     title: `${postData.title} | Markdown Blog`,
     description: postData.description || `Read the blog post titled "${postData.title}"`,
-    // openGraph: {
-    //   images: ['/some-specific-page-image.jpg', ...previousImages],
-    // },
   };
 }
+
 
 // Generate Static Paths
 export async function generateStaticParams() {

@@ -37,7 +37,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="mt-auto border-t py-4 text-center text-muted-foreground text-sm">
-           Built with Next.js & Markdown
+           Built with Next.js & Markdown by Mae Techs
         </footer>
         <Toaster />
       </body>
